@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "925210343678",
+    "project_id": "insiit-ibp",
+    "storage_bucket": "insiit-ibp.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:925210343678:android:da147125486ef605dccdaf",
+        "android_client_info": {
+          "package_name": "com.example.insiit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "925210343678-so7869ouijssje2ih94052h4v84aq54h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzagL3C1-oud5byP4eCbPFhHXDazpq7SY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "925210343678-so7869ouijssje2ih94052h4v84aq54h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
