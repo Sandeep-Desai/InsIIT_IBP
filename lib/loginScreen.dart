@@ -27,10 +27,10 @@ class Myhome extends StatelessWidget {
           Image.asset('images/iitgn_logo.png'),
           ElevatedButton(
               onPressed: () {
-                signWithGoogleId();
-                Navigator.pushNamed(context, '/homepage');
+                signWithGoogleId(context: context);
               },
-              child: Text("Login with Google"))
+              child: Column(
+                  children: [Text("Login with Google"), Icon(Icons.login)])),
         ],
       ),
     );
