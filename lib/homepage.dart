@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:insiit/auth.dart';
 import 'package:insiit/loginScreen.dart';
+import 'package:insiit/weekly_menu/interface.dart';
 
-void main() => runApp(homepage());
+void main() => runApp(homePage());
 
-class homepage extends StatefulWidget {
+class homePage extends StatefulWidget {
   @override
-  State<homepage> createState() => _homepagestate();
+  State<homePage> createState() => _homePageState();
 }
 
-class _homepagestate extends State<homepage> {
+class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,10 +26,18 @@ class _homepagestate extends State<homepage> {
                   signOut();
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    MaterialPageRoute(builder: (context) => loginPage()),
                   );
                 },
-                child: Text("Sign Out"))
+                child: Text("Sign Out")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WeeklyMenuTemp()));
+                },
+                child: Text("Weekly Mess Menu"))
           ],
         ),
       ),

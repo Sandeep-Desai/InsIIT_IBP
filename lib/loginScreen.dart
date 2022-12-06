@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:insiit/auth.dart';
 import 'package:insiit/homepage.dart';
+import 'package:insiit/messmenu/googleSheetAPI.dart';
+import 'package:insiit/weekly_menu/interface.dart';
 
-void main() => runApp(LoginPage());
+void main() => runApp(loginPage());
 
-class LoginPage extends StatefulWidget {
+class loginPage extends StatefulWidget {
   @override
-  State<LoginPage> createState() => loginPageState();
+  State<loginPage> createState() => loginPageState();
 }
 
-class loginPageState extends State<LoginPage> {
+class loginPageState extends State<loginPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        routes: {'/homepage': (context) => homepage()}, home: Myhome());
+        routes: {
+          '/homepage': (context) => homePage(),
+          '/weeklyMenu': (context) => WeeklyMenuTemp()
+        },
+        theme: ThemeData(
+          primarySwatch: Colors.green,
+        ),
+        home: Myhome());
   }
 }
 

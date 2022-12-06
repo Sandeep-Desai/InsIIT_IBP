@@ -1,0 +1,3 @@
+Use Camel Case notation for naming widgets and dart files
+
+always use _before making state

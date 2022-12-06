@@ -39,7 +39,7 @@ dependencies:
   firebase_core: ^1.24.0
   google_sign_in: ^5.4.2
   cupertino_icons: ^1.0.2
-
+  gsheets: ^0.4.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -65,6 +65,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - images/iitgn_logo.png
+    - lib/messmenu/credentials.json
     
 
   # An image asset can refer to one or more resolution-specific "variants", see
