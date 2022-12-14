@@ -18,7 +18,8 @@ List<busRoute> findRoutes(String src, String dest) {
   for (var i = 0; i < busRoutes.length; i++) {
     // print(busRoutes[i]);
     if (busRoutes[i].start == "IITGN" && src == "IITGN") {
-      for (var j = 0; j < busRoutes.length; j++) {
+      print("Hello");
+      for (var j = 0; j < busRoutes[i].stops.length; j++) {
         if (dest == busRoutes[i].stops[j]) {
           temp.add(busRoutes[i]);
           break;
@@ -45,6 +46,7 @@ List<busRoute> findRoutes(String src, String dest) {
       }
     }
   }
+  print(temp);
   return temp;
 }
 
@@ -142,7 +144,7 @@ class shuttlePageState extends State<shuttlePage> {
                         style: TextStyle(fontSize: 15),
                       ),
                       DropdownButton(
-                        dropdownColor: Colors.blueGrey,
+                        // dropdownColor: Colors.blueGrey,
                         value: dropdownvalue2,
                         items: busStops2.map((String items) {
                           return DropdownMenuItem(
@@ -419,8 +421,9 @@ class busRouteItem3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey,
-      ),
+          color: Color.fromARGB(76, 255, 235, 59),
+          border:
+              Border.all(width: 2, color: Color.fromARGB(102, 255, 235, 59))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -434,7 +437,7 @@ class busRouteItem3 extends StatelessWidget {
           ),
           Column(
             // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Icon(Icons.alarm), Text(dept_time)],
+            children: [Icon(color: Colors.green, Icons.alarm), Text(dept_time)],
           ),
         ],
       ),
