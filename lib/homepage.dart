@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:insiit/auth.dart';
 import 'package:insiit/loginScreen.dart';
+import 'package:insiit/messmenu/googleSheetAPI.dart';
 import 'package:insiit/shuttle/shuttle.dart';
 import 'package:insiit/weekly_menu/interface.dart';
 import 'package:insiit/shuttle/shuttle.dart';
@@ -23,7 +24,6 @@ class _homePageState extends State<homePage> {
           ),
           body: Column(
             children: [
-              Text("Welcome to InsIIT"),
               ElevatedButton(
                   onPressed: () {
                     signOut();

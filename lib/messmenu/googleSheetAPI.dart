@@ -1,9 +1,11 @@
 import 'dart:collection';
-
 import 'package:flutter/material.dart';
 import 'package:gsheets/gsheets.dart';
 import 'dart:convert';
 import 'package:insiit/gsheets/commonFunctions.dart';
+
+List<List<List<String>>> temp_meals = [];
+int messMenuMonth = 0;
 
 class userSheetsAPI {
   // credentials of service account
@@ -22,35 +24,46 @@ class userSheetsAPI {
 
   // id of google sheet we want to access
   static final _sheetId = "16EKFO-B7YVqMO61IdgvZnv_H9M_37ZxqYiVLvWkrh8g";
-  static final allMeals = {};
+
   // initializing gsheets package
   static final _gSheet = GSheets(_credentials);
   static Worksheet? _userSheet;
+
+  // mealItems is global variable used as buffer to add meal items of specific day and type
   static List<String> mealItems = [];
-  static final List<List<List<String>>> temp_meals = [];
+
+  //
+
+  // init function
   static Future init() async {
-    print("at start");
-    final spreadSheet = await _gSheet.spreadsheet(_sheetId);
-    _userSheet = await getWorkSheet(spreadSheet, title: 'MessMenu_September');
-    // print(await _userSheet!.values.value(column: 1, row: 1));
-    // await getMeal(1, 0);
-    print("at middle");
-    int numDays = 7;
-    int numMeals = 4;
-    print("in init of google sheet api");
-    for (int i = 1; i <= numDays; i++) {
-      List<List<String>> temp_ver = [];
-      for (int j = 1; j <= numMeals; j++) {
-        await getMeal(i, j);
-        List<int> temp = [i, j];
-        allMeals[[i, j]] = mealItems;
-        temp_ver.add(mealItems);
-        // print(mealItems);
+    print(DateTime.now().month);
+    print(messMenuMonth);
+    print(temp_meals.length);
+    if (DateTime.now() != messMenuMonth || temp_meals.length == 0) {
+      print("Fetched Google sheet");
+      final spreadSheet = await _gSheet.spreadsheet(_sheetId);
+      // get a work sheet with title provided, if worksheet with given title does not will create one
+      _userSheet = await getWorkSheet(spreadSheet, title: 'MessMenu');
+
+      int numDays = 7;
+      int numMeals = 4;
+
+      // fetching data from given spread sheet
+
+      for (int i = 1; i <= numDays; i++) {
+        List<List<String>> temp_ver = [];
+        for (int j = 1; j <= numMeals; j++) {
+          await getMeal(i, j);
+
+          List<int> temp = [i, j];
+
+          temp_ver.add(mealItems);
+        }
+
+        temp_meals.add(temp_ver);
       }
-      temp_meals.add(temp_ver);
+      messMenuMonth = await getMonth();
     }
-    print(temp_meals[0][0]);
-    // print(allMeals);
   }
 
   static Future<Worksheet> getWorkSheet(
@@ -66,17 +79,10 @@ class userSheetsAPI {
   }
 
   static Future<void> populateList(int start, int end, int day) async {
-    // for (int i = start; i <= end; i++) {
-    //   String temp = await _userSheet!.values.value(column: day, row: i);
-    //   List<String> temp_list = await _userSheet!.values.column(day);
-    //   print(temp_list);
-    //   mealItems.add(temp);
-    // }
     List<String> temp_list = await _userSheet!.values.column(day);
     for (int i = start; i <= end; i++) {
       mealItems.add(temp_list[i - 1]);
     }
-    // print(temp_list);
   }
 
   static Future<void> getMeal(int day, int mealType) async {
@@ -90,6 +96,11 @@ class userSheetsAPI {
     } else if (mealType == 4) {
       await populateList(31, 39, day);
     }
-    // return mealItems;
+  }
+
+  static Future<int> getMonth() async {
+    int temp = int.parse(await _userSheet!.values.value(column: 1, row: 40));
+    print(temp);
+    return temp;
   }
 }

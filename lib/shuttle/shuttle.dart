@@ -1,7 +1,8 @@
-import 'dart:developer';
-
+// import 'dart:developer'
+// import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:timelines/timelines.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void addBusRoute(
     String start, String dest, List<String> stops, String departure_time) {
@@ -419,27 +420,37 @@ class busRouteItem3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Color.fromARGB(76, 255, 235, 59),
-          border:
-              Border.all(width: 2, color: Color.fromARGB(102, 255, 235, 59))),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text("From: " + start),
-              Text("To: " + dest),
-              Text("Stops at: " + addStrings(stops)),
-            ],
-          ),
-          Column(
-            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Icon(color: Colors.green, Icons.alarm), Text(dept_time)],
-          ),
-        ],
+    return DefaultTextStyle(
+      style: GoogleFonts.lato(
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+      ),
+      child: Container(
+        // margin: EdgeInsetsGeometry,
+        decoration: BoxDecoration(
+            color: Color.fromARGB(255, 87, 82, 82),
+            border:
+                Border.all(width: 2, color: Color.fromARGB(102, 255, 235, 59))),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("From: " + start),
+                Text("To: " + dest),
+                Text("Stops at: " + addStrings(stops)),
+              ],
+            ),
+            Column(
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Icon(color: Colors.green, Icons.alarm),
+                Text(dept_time)
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

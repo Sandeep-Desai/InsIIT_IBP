@@ -10,15 +10,10 @@ import 'package:insiit/weekly_menu/interface.dart';
 import 'package:insiit/shuttle/shuttle.dart';
 
 Future main() async {
-  print("before init");
   WidgetsFlutterBinding.ensureInitialized();
-  print("after widget");
+
   await userSheetsAPI.init();
   await Firebase.initializeApp();
-  print("after init");
-  // print(isLoggedIn());
-  print(isLoggedIn);
-  print(FirebaseAuth.instance.currentUser);
 
   addBusRoute("IITGN", "Visat", ["AB1", "Research Park", "Gate-2", "Kudasan"],
       "5:15 PM");
@@ -36,6 +31,12 @@ Future main() async {
       "8:15 AM");
 
   if (FirebaseAuth.instance.currentUser != null) {
+    var currentUser = FirebaseAuth.instance.currentUser;
+    user_name = (currentUser?.displayName)!;
+    email_id = (currentUser?.email)!;
+    profile_url = (currentUser?.photoURL)!;
+
+    isGuest = false;
     runApp(homePage());
   } else {
     runApp(MyApp());

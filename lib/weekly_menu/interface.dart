@@ -1,16 +1,28 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:insiit/messmenu/googleSheetAPI.dart';
 
-Future<void> main() async {
-  await userSheetsAPI.getMeal(2, 0);
-  messItems = userSheetsAPI.mealItems;
-  print("main ran: ");
-  print(messItems);
-  runApp(WeeklyMenuTemp());
-}
+// To access a meal of specific day and type we can use temp meals, at start
+// of app this matrix of is filled with values from google sheet
+// For example we want to access meal for Wednesday's lunch, we can use
+// List<String> wednesday_meal=temp_meal[2][1]
 
-List<String> dummyList = ["Sandeep", "Desai"];
+// Indexing is as follwing
+// Day First Index  Meal Type Second Index
+// Mon   0          Breakfast    0
+// Tue   1          Lunch        1
+// Wed   2          Snacks       2
+// Thurs 3          Dinner       3
+// Fri   4
+// Sat   5
+// Sun   6
+
+// Future<void> main() async {
+//   await userSheetsAPI.getMeal(2, 0);
+//   messItems = userSheetsAPI.mealItems;
+
+//   runApp(WeeklyMenuTemp());
+// }
+
 List<String> messItems = userSheetsAPI.mealItems;
 List meals = ["Breakfast", "Lunch", "Snacks", "Dinner"];
 
@@ -23,20 +35,6 @@ List day_names = [
   "Saturday",
   "Sunday"
 ];
-
-// class WeeklyMenu extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(title: Text("Weekly Mess Menu")),
-//       body: Column(
-//         children: [
-//           for (String item in messItems) Text(item),
-//         ],
-//       ),
-//     );
-//   }
-// }
 
 class WeeklyMenuTemp extends StatelessWidget {
   @override
@@ -70,7 +68,6 @@ class WeeklyMenuTemp extends StatelessWidget {
 class dynamic_widget extends StatelessWidget {
   final int day;
 
-  // const dynamic_widget({Key? key,required this.day}) : super(key: key);
   dynamic_widget({
     Key? key,
     required this.day,
@@ -108,7 +105,7 @@ class mealTypeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        for (String item in userSheetsAPI.temp_meals[day][mealType])
+        for (String item in temp_meals[day][mealType])
           Container(
             decoration: BoxDecoration(
                 border: Border.all(color: Colors.grey),
